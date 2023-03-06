@@ -1,0 +1,173 @@
+""""""""""""""""""""""""""""""
+" vimrc
+""""""""""""""""""""""""""""""
+call plug#begin('C:\Users\npm091\.vim\plugged')
+
+" Japanese Help
+Plug 'vim-jp/vimdoc-ja'
+
+" fzf
+Plug 'junegunn/fzf', { 'dir': 'C:\Users\npm091\.fzf', 'do': '.\install --all' }
+Plug 'junegunn/fzf.vim'
+
+" vim lsp setting
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+Plug 'mattn/emmet-vim'
+
+" color scheme
+Plug 'chriskempson/base16-vim'
+
+" filer
+Plug 'lambdalisue/fern.vim'
+
+" Customize status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" database access
+Plug 'vim-scripts/dbext.vim'
+
+" translater
+Plug 'skanehira/translate.vim'
+
+" markdown
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'previm/previm'
+Plug 'plasticboy/vim-markdown'
+Plug 'kannokanno/previm'
+Plug 'tyru/open-browser.vim'
+let g:vim_markdown_folding_disabled = 1
+let g:previm_enable_realtime = 1
+" let g:previm_open_cmd = 'open -a Microsoft\ Edge'
+let g:previm_open_cmd = 'C:\\Program\ Files\ (x86)\\Google\\Chrome\\Application\\chrome.exe'
+" let g:previm_open_cmd = 'C:\\Program\ Files\ (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+call plug#end()
+
+""""""""""""""""""""""""""""""
+set nocompatible
+set backspace=indent,eol,start
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
+set helplang=ja,en
+set number
+set expandtab
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+set laststatus=2
+syntax on
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set smartindent
+filetype plugin indent on
+set showcmd
+set background=dark
+set wildmenu
+set ruler
+set showmatch
+set clipboard+=unnamed
+set directory=~/.vim/tmp
+
+" line number color
+highlight lineNr term=underline ctermfg=11 guifg=Grey
+
+" setting color scheme
+let base16colorspace=256  " Access colors present in 256 colorspace
+set termguicolors
+"colorscheme base16-default-dark
+colorscheme  darkblue
+
+" setting status bar
+let g:airline_theme='luna'
+let g:airline#extensions#tabline#enabled=1
+
+" ファイルを上書きする前にバックアップを作ることを無効化
+set nowritebackup
+" ファイルを上書きする前にバックアップを作ることを無効化
+set nobackup
+" vim の矩形選択で文字が無くても右へ進める
+set virtualedit=block
+" 挿入モードでバックスペースで削除できるようにする
+set backspace=indent,eol,start
+" 全角文字専用の設定
+set ambiwidth=double
+" wildmenuオプションを有効(vimバーからファイルを選択できる)
+set wildmenu
+
+set clipboard+=unnamed
+
+" skanehira/preview-markdown.vim用の設定値
+let g:preview_markdown_vertical = 1
+let g:preview_markdown_auto_update = 1
+
+" 新しいウィンドウを右に開く
+set splitright
+
+" set imd
+set hidden
+
+" chnge current directory which open file
+set autochdir
+
+"mouse
+set mouse=a
+set ttymouse=sgr
+
+if has("autocmd")
+  filetype plugin on
+  filetype indent on
+  autocmd FileType c           setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType ejs         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType zsh         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType python      setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType scala       setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType json        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType css         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType scss        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType sass        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
+  autocmd BufNewFile,BufRead *.ejs  set filetype=html
+  autocmd BufRead,BufNewFile *.txt set syntax=config
+"  autocmd BufReadPost * tab ball
+endif
+tab ba
+
+" database
+let g:dbext_default_SQLITE_bin = 'sqlite3'
+let g:dbext_default_profile_mysql = 'type=MYSQL:host=127.0.0.1:port=3306:user=public:passwd=public:dbname=public:extra=--default-character-set=utf8 -t'
+let g:dbext_default_profile_public = 'type=SQLITE:dbname=C:\home\npm091\Development\node\AccountManager\public\data\public_node.db'
+let g:dbext_default_profile_account = 'type=SQLITE:dbname=C:\home\npm091\Development\node\AccountManager\public\data\AccountManager.db'
+let g:dbext_default_profile = 'account'
+
+" insert mode key map
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-s> <ESC>:w<CR>
+inoremap <C-c> <ESC>yiwa
+inoremap <Leader>v <C-r>0
+"inoremap <C-n>  <Down>
+"inoremap <C-p>  <UP>
+
+nnoremap <C-s> :w<CR>
+nnoremap <C-p> <Plug>AirlineSelectPrevTab
+nnoremap <C-n> <Plug>AirlineSelectNextTab
+nnoremap <silent><C-TAB> :bn<CR>
+nnoremap <silent><C-S-TAB> :bp<CR>
+nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>c :bd<CR>
+nnoremap <Leader>md :PrevimOpen<CR>
+
+" visual mode key map
+vnoremap <C-c> y
+
